@@ -295,7 +295,7 @@ def getSimulationName():
 ##----------------------------------------------------------------------------##
 
 # This function pulls pulse height estimator data outputs it to a separate file.
-def processDataFromRendezvous( rendezvous, range, calorimeter_thickness ):
+def processDataFromRendezvous( rendezvous_file, range, calorimeter_thickness ):
 
   Collision.FilledGeometryModel.setDefaultDatabasePath( database_path )
 
