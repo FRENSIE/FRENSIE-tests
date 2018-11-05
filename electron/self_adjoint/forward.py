@@ -110,7 +110,7 @@ def runSimulation( threads, histories, time ):
   if energy == 0.1:
     bins = list(Utility.doubleArrayFromString( "{ 1e-4, 5e-4, 198i, 1e-1}" ))
   elif energy == 0.01:
-    bins = list(Utility.doubleArrayFromString( "{ 1e-4, 137i, 7e-3, 29i, 1e-2}" ))
+    bins = list(Utility.doubleArrayFromString( "{ 1e-4, 58i, 6e-3, 99i, 1e-2}" ))
   elif energy == 0.001:
     bins = list(Utility.doubleArrayFromString( "{ 1e-4, 197i, 1e-3}" ))
   else:
@@ -310,7 +310,6 @@ def createResultsDirectory():
   if not path.exists(directory):
     makedirs(directory)
 
-  print directory
   return directory
 
 ##----------------------------------------------------------------------------##
@@ -318,11 +317,9 @@ def createResultsDirectory():
 ##----------------------------------------------------------------------------##
 # Define a function for naming an electron simulation
 def setSimulationName( properties ):
-  extension, title = setup.setAdjointSimulationNameExtention( properties )
+  extension, title = setup.setSimulationNameExtention( properties, file_type )
   name = "forward_" + str(energy) + extension
-  date = str(datetime.datetime.today()).split()[0]
-
-  output = "results/forward/" + date + "/" + name
+  output = setup.getResultsDirectory(file_type, interpolation) + "/" + name
 
   return (output, title)
 

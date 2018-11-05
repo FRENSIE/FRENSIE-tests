@@ -16,7 +16,7 @@ EXTRA_ARGS=$@
 # Set the number of histories
 HISTORIES=1000000
 # Set the max runtime (in minutes, 1 day = 1440 )
-TIME=1400
+TIME=1350
 
 # These parameters can be set if the cluster is not used
 # SLURM_CPUS_PER_TASK=4

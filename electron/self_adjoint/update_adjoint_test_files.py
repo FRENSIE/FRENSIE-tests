@@ -64,11 +64,13 @@ if __name__ == "__main__":
     epr_file_name = path.dirname(options.db_name) + "/" + data_properties.filePath()
 
     # Get/create the aepr directory path
-    aepr_directory = aepr_file_name = path.dirname(path.dirname( epr_file_name ))
-    makedirs( aepr_directory )
+    aepr_directory = path.dirname(path.dirname( epr_file_name )) + "/aepr"
+
+    if not path.exists(aepr_directory):
+      makedirs( aepr_directory )
 
     # Ste the aepr file name
-    aepr_file_name = aepr_directory + "aepr/aepr_native_1.xml"
+    aepr_file_name = aepr_directory + "/aepr_native_1.xml"
 
     # Get the date for the table notes
     today = str(datetime.datetime.today())
@@ -78,10 +80,11 @@ if __name__ == "__main__":
     print bcolors.BOLD + "Updating the adjoint H native test data ...\n" + bcolors.ENDC
 
 
+    max_electron_energies = [ 0.1, 0.01, 0.001 ]
+
     min_photon_energy = 1e-3
     max_photon_energy = 3.0
     min_electron_energy = 1e-5
-    max_electron_energy = 0.01
 
     # Set default photon grid tolerances
     photon_grid_convergence_tol = 1e-3
@@ -125,58 +128,65 @@ if __name__ == "__main__":
 
     # Generate the data
     # try:
-    data_container = \
-    generateData( epr_file_name,
-                  aepr_file_name,
-                  True,
-                  notes,
-                  min_photon_energy,
-                  max_photon_energy,
-                  min_electron_energy,
-                  max_electron_energy,
-                  photon_grid_convergence_tol,
-                  photon_grid_abs_diff_tol,
-                  photon_grid_dist_tol,
-                  adjoint_pp_energy_dist_norm_const_eval_tol,
-                  adjoint_pp_energy_dist_norm_const_nudge_val,
-                  adjoint_tp_energy_dist_norm_const_eval_tol,
-                  adjoint_tp_energy_dist_norm_const_nudge_val,
-                  adjoint_incoherent_max_energy_nudge_val,
-                  adjoint_incoherent_energy_to_max_energy_nudge_val,
-                  adjoint_incoherent_eval_tol,
-                  adjoint_incoherent_grid_convergence_tol,
-                  adjoint_incoherent_grid_abs_diff_tol,
-                  adjoint_incoherent_grid_dist_tol,
-                  electron_grid_convergence_tol,
-                  electron_grid_abs_diff_tol,
-                  electron_grid_dist_tol,
-                  cutoff_angle_cosine,
-                  num_moment_preserving_angles,
-                  tabular_evaluation_tol,
-                  electron_two_d_interp_policy,
-                  electron_two_d_grid_policy,
-                  brems_min_energy_nudge_val,
-                  brems_max_energy_nudge_val,
-                  brems_eval_tol,
-                  brems_grid_convergence_tol,
-                  brems_grid_abs_diff_tol,
-                  brems_grid_dist_tol,
-                  electroion_min_energy_nudge_val,
-                  electroion_max_energy_nudge_val,
-                  electroion_eval_tol,
-                  electroion_convergence_tol,
-                  electroion_abs_diff_tol,
-                  electroion_dist_tol )
-    # except Exception as e:
-    #     print(bcolors.BOLD + bcolors.FAIL + '\nadjoint H native data FAILED to update: '+ str(e))
-    #     sys.exit(1)
 
-    addToDatabase( aepr_file_name,
-                   path.dirname( options.db_name ),
-                   database,
-                   data_container.getAtomicNumber(),
-                   data_container.getAtomicWeight() )
+    for i in range(len(max_electron_energies) ):
+      max_electron_energy = max_electron_energies[i]
 
-    database.saveToFile( options.db_name, True )
+      print bcolors.BOLD + "Updating file version" + str(i) + "with a max energy of" + str(max_electron_energy) + "MeV\n" + bcolors.ENDC
+
+      data_container = \
+      generateData( epr_file_name,
+                    aepr_file_name,
+                    True,
+                    notes,
+                    min_photon_energy,
+                    max_photon_energy,
+                    min_electron_energy,
+                    max_electron_energy,
+                    photon_grid_convergence_tol,
+                    photon_grid_abs_diff_tol,
+                    photon_grid_dist_tol,
+                    adjoint_pp_energy_dist_norm_const_eval_tol,
+                    adjoint_pp_energy_dist_norm_const_nudge_val,
+                    adjoint_tp_energy_dist_norm_const_eval_tol,
+                    adjoint_tp_energy_dist_norm_const_nudge_val,
+                    adjoint_incoherent_max_energy_nudge_val,
+                    adjoint_incoherent_energy_to_max_energy_nudge_val,
+                    adjoint_incoherent_eval_tol,
+                    adjoint_incoherent_grid_convergence_tol,
+                    adjoint_incoherent_grid_abs_diff_tol,
+                    adjoint_incoherent_grid_dist_tol,
+                    electron_grid_convergence_tol,
+                    electron_grid_abs_diff_tol,
+                    electron_grid_dist_tol,
+                    cutoff_angle_cosine,
+                    num_moment_preserving_angles,
+                    tabular_evaluation_tol,
+                    electron_two_d_interp_policy,
+                    electron_two_d_grid_policy,
+                    brems_min_energy_nudge_val,
+                    brems_max_energy_nudge_val,
+                    brems_eval_tol,
+                    brems_grid_convergence_tol,
+                    brems_grid_abs_diff_tol,
+                    brems_grid_dist_tol,
+                    electroion_min_energy_nudge_val,
+                    electroion_max_energy_nudge_val,
+                    electroion_eval_tol,
+                    electroion_convergence_tol,
+                    electroion_abs_diff_tol,
+                    electroion_dist_tol )
+      # except Exception as e:
+      #     print(bcolors.BOLD + bcolors.FAIL + '\nadjoint H native data FAILED to update: '+ str(e))
+      #     sys.exit(1)
+
+      addToDatabase( aepr_file_name,
+                    path.dirname( options.db_name ),
+                    database,
+                    data_container.getAtomicNumber(),
+                    data_container.getAtomicWeight(),
+                    i )
+
+      database.saveToFile( options.db_name, True )
 
     print bcolors.BOLD + bcolors.OKGREEN + "adjoint H native data updated successfully!\n" + bcolors.ENDC

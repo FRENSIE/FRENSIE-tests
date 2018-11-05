@@ -273,7 +273,7 @@ def createResultsDirectory():
 # Define a function for naming an electron simulation
 def setSimulationName( properties ):
   extension, title = setup.setSimulationNameExtention( properties, file_type )
-  name = "lockwood_" + "_" + element + str(test_number) + extension
+  name = "lockwood_" + element + "_" + str(test_number) + extension
   output = element + "/" + setup.getResultsDirectory(file_type, interpolation) + "/" + name
 
   return (output, title)

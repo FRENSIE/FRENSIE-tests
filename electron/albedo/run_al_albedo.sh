@@ -19,7 +19,7 @@ OPEN_MP_THREADS=4
 # Set the number of histories
 HISTORIES=1000000
 # Set the max runtime (in minutes, 1 day = 1440 )
-TIME=1400
+TIME=1350
 
 # Set the test energy (0.0002 0.0003 0.0004 0.0005 0.0006 0.0008 0.001 0.0015 0.002 0.0025 0.003 0.0035 0.004 0.0045 0.005 0.006 0.0093 0.01 0.011 0.0134 0.015 0.0173 0.02 0.0252 0.03 0.04 0.0415 0.05 0.06 0.0621 0.07 0.08 0.0818 0.1 0.102 0.121 0.146 0.172 0.196 0.2 0.238 0.256 )
 # energies can be set to indivual energies e.g. ( 0.02 0.03 0.04 ) or "all"

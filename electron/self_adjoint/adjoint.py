@@ -104,7 +104,7 @@ def runSimulation( threads, histories, time ):
   if energy == 0.1:
     bins = list(Utility.doubleArrayFromString( "{ 1e-4, 5e-4, 198i, 1e-1}" ))
   elif energy == 0.01:
-    bins = list(Utility.doubleArrayFromString( "{ 1e-4, 137i, 7e-3, 29i, 1e-2}" ))
+    bins = list(Utility.doubleArrayFromString( "{ 1e-4, 58i, 6e-3, 99i, 1e-2}" ))
   elif energy == 0.001:
     bins = list(Utility.doubleArrayFromString( "{ 1e-4, 197i, 1e-3}" ))
   else:
@@ -188,6 +188,10 @@ def runSimulation( threads, histories, time ):
 
 
   version = 0
+  # if energy == 0.1:
+    # version = 0
+  # else:
+  #   version = 1
   file_type = Data.AdjointElectroatomicDataProperties.Native_EPR_FILE
 
   element_definition.setAdjointElectroatomicDataProperties(
@@ -315,10 +319,10 @@ def setSimulationProperties( histories, time ):
   ## -------------------------- ELECTRON PROPERTIES ------------------------- ##
 
   # Turn certain reactions off
-  # properties.setElasticModeOff()
-  # properties.setElectroionizationModeOff()
-  # properties.setBremsstrahlungModeOff()
-  # properties.setAtomicExcitationModeOff()
+  # properties.setAdjointElasticModeOff()
+  # properties.setAdjointElectroionizationModeOff()
+  # properties.setAdjointBremsstrahlungModeOff()
+  # properties.setAdjointAtomicExcitationModeOff()
 
   return properties
 
