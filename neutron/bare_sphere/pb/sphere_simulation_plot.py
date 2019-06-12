@@ -19,6 +19,7 @@ def plotSphereSimulationSpectrum( rendezvous_file,
                                   is_a_current,
                                   top_ylims = None,
                                   bottom_ylims = None,
+                                  xlims = None,
                                   legend_pos = None ):
     # Reload the simulation
     manager = Manager.ParticleSimulationManagerFactory( rendezvous_file ).getManager()
@@ -28,6 +29,9 @@ def plotSphereSimulationSpectrum( rendezvous_file,
 
     entity_bin_data = estimator.getEntityBinProcessedData( entity_id )
     entity_bin_data["e_bins"] = estimator.getEnergyDiscretization()
+
+    for i in range(0,len(entity_bin_data["mean"])):
+        print entity_bin_data["e_bins"][i+1], entity_bin_data["mean"][i], entity_bin_data["re"][i]
     
     # Extract the mcnp data from the output file
     mcnp_file = open( mcnp_file, "r" )
@@ -42,7 +46,7 @@ def plotSphereSimulationSpectrum( rendezvous_file,
         mcnp_bin_data["mean"].append( float(split_line[1]) )
         mcnp_bin_data["re"].append( float(split_line[2]) )
         
-    output_file_name = "h1_sphere_"
+    output_file_name = "pb_sphere_"
     output_file_names = []
 
     if is_a_current:
@@ -64,5 +68,6 @@ def plotSphereSimulationSpectrum( rendezvous_file,
                                 per_lethargy = is_a_current,
                                 top_ylims = top_ylims,
                                 bottom_ylims = bottom_ylims,
+                                xlims = xlims,
                                 legend_pos = legend_pos,
                                 output_plot_names = output_file_names )

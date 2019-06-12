@@ -1,0 +1,4 @@
+run `mcnp6 i=sphere_mcnp.i o=sphere_mcnp.o tasks 8`
+run `./sphere.py --db_path=/home/software/mcnpdata/database.xml --sim_name="sphere" --num_particles=1e8 --threads=8 --source_energy=10.0`
+run `./sphere-plot.py --rendezvous_file="sphere_rendezvous_10.xml" --estimator_id=1 --entity_id=1 --mcnp_file=sphere_mcnp.o --mcnp_file_start=1237 --mcnp_file_end=1338 --current`
+run `./sphere-plot.py --rendezvous_file="sphere_rendezvous_10.xml" --estimator_id=2 --entity_id=1 --mcnp_file=sphere_mcnp.o --mcnp_file_start=1404 --mcnp_file_end=1505 --flux`

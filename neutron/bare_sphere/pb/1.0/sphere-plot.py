@@ -27,13 +27,13 @@ if __name__ == "__main__":
     options,args = parser.parse_args()
 
     if options.is_a_current:
-        top_ylims = [0.0, 0.30]
-        bottom_ylims = [0.9, 1.1]
-        legend_pos = (1.02,0.98)
+        top_ylims = [0.0, 6.0]
+        bottom_ylims = [0.95, 1.05]
+        legend_pos = (0.95,0.95)
     else:
-        top_ylims = [0.0, 120000.0]
-        bottom_ylims = [0.9, 1.1]
-        legend_pos = (1.02,1.03)
+        top_ylims = [0.0, 1E-3]
+        bottom_ylims = [0.95, 1.05]
+        legend_pos = (0.95,0.95)
         
     # Plot the spectrum
     plotSphereSimulationSpectrum( options.rendezvous_file,
@@ -45,6 +45,7 @@ if __name__ == "__main__":
                                   options.is_a_current,
                                   top_ylims = top_ylims,
                                   bottom_ylims = bottom_ylims,
+                                  xlims = [0.0001,1.0],
                                   legend_pos = legend_pos )
 
     
