@@ -31,10 +31,11 @@ if __name__ == "__main__":
         bottom_ylims = [0.9, 1.1]
         legend_pos = (0.95,0.95)
     else:
-        top_ylims = [0.0, 180000.0]
+        top_ylims = [0.0, 300000.0]
         bottom_ylims = [0.9, 1.1]
         legend_pos = (0.95,0.95)
-        
+
+
     # Plot the spectrum
     plotSphereSimulationSpectrum( options.rendezvous_file,
                                   options.estimator_id,
@@ -47,4 +48,3 @@ if __name__ == "__main__":
                                   bottom_ylims = bottom_ylims,
                                   legend_pos = legend_pos )
 
-    
