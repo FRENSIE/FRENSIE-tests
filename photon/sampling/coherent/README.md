@@ -1,0 +1,4 @@
+1. run `./sample_angle.py --db_path=$DATABASE_PATH --atomic_number=1 --model_type=eff --incoming_energy=0.005 --num_samples=1000000 --legend_xpos=0.9 --legend_ypos=0.95`
+2. run `./sample_angle.py --db_path=$DATABASE_PATH --atomic_number=1 --model_type=eff --incoming_energy=0.01 --num_samples=1000000 --legend_xpos=0.9 --legend_ypos=0.95`
+3. run `./sample_angle.py --db_path=$DATABASE_PATH --atomic_number=1 --model_type=eff --incoming_energy=0.02 --num_samples=1000000 --legend_xpos=0.9 --legend_ypos=0.95`
+4. run `./sample_angle.py --db_path=$DATABASE_PATH --atomic_number=1 --model_type=eff --incoming_energy=0.03 --num_samples=1000000 --legend_xpos=0.9 --legend_ypos=0.95`

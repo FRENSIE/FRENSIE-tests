@@ -27,8 +27,11 @@
 *.inpr
 *.inpm
 *.pyc
+*.tar.gz
 runtp*
 mcta*
+dyson_sphere.h5m
+infinite_medium.h5m
 results/
 old_results/
 results_linlin/

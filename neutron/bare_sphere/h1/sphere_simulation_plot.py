@@ -6,6 +6,7 @@ import sys
 import PyFrensie.Geometry.DagMC as DagMC
 import PyFrensie.Utility as Utility
 import PyFrensie.MonteCarlo as MonteCarlo
+import PyFrensie.MonteCarlo.Collision as Collision
 import PyFrensie.MonteCarlo.Event as Event
 import PyFrensie.MonteCarlo.Manager as Manager
 from spectrum_plot_tools import plotSpectralDataWithErrors
@@ -20,6 +21,10 @@ def plotSphereSimulationSpectrum( rendezvous_file,
                                   top_ylims = None,
                                   bottom_ylims = None,
                                   legend_pos = None ):
+
+    # Set the database path
+    Collision.FilledGeometryModel.setDefaultDatabasePath( os.environ['DATABASE_PATH'] )
+    
     # Reload the simulation
     manager = Manager.ParticleSimulationManagerFactory( rendezvous_file ).getManager()
     

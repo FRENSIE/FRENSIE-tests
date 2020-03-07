@@ -319,7 +319,11 @@ def createResultsDirectory():
 def setSimulationName( properties ):
   extension, title = setup.setSimulationNameExtention( properties, file_type )
   name = "forward_" + str(energy) + extension
-  output = setup.getResultsDirectory(file_type, interpolation) + "/" + name
+
+  date = str(datetime.datetime.today()).split()[0]
+  directory = "results/forward/" + date
+
+  output = directory + "/" + name
 
   return (output, title)
 

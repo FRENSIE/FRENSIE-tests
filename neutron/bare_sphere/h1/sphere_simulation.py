@@ -49,6 +49,7 @@ def sphereSimulation( sim_name,
     simulation_properties.setParticleMode( MonteCarlo.NEUTRON_MODE )
     simulation_properties.setUnresolvedResonanceProbabilityTableModeOff()
     simulation_properties.setNumberOfNeutronHashGridBins( 100 )
+    simulation_properties.setSurfaceFluxEstimatorAngleCosineCutoff( 0.1 )
     
     # Set the number of histories to run and the number of rendezvous
     simulation_properties.setNumberOfHistories( num_particles )

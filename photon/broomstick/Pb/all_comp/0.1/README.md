@@ -1,0 +1,1 @@
+1. run `./broomstick-comp-plot.py --wh_data_file=../../nodopp_ia/0.1/broomstick_wh_data.out --ia_data_file=../../nodopp_ia/0.1/broomstick_ia_data.out --hybrid_data_file=../../dopp_consistent/0.1/broomstick_hybrid_data.out --consistent_data_file=../../dopp_consistent/0.1/broomstick_consistent_data.out`

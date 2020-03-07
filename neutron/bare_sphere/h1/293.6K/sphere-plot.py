@@ -28,11 +28,11 @@ if __name__ == "__main__":
 
     if options.is_a_current:
         top_ylims = [0.0, 0.175]
-        bottom_ylims = [0.9, 1.1]
+        bottom_ylims = [0.96, 1.04]
         legend_pos = (1.02,1.0)
     else:
         top_ylims = [0.0, 500000.0]
-        bottom_ylims = [0.9, 1.1]
+        bottom_ylims = [0.96, 1.04]
         legend_pos = (1.02,1.03)
         
     # Plot the spectrum

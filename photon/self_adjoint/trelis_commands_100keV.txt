@@ -1,0 +1,13 @@
+sphere r 20.0
+brick x 45.0 y 45.0 z 45.0
+brick x 50.0 y 50.0 z 50.0
+subtract volume 2 from volume 3
+imprint body all
+merge tol 5e-7
+merge all
+group 'termination.cell' add vol 4
+group 'material_1_density_-0.00008988' add vol 1
+group 'estimator_1.surface.flux.p' add surface 1
+group 'estimator_2.surface.flux.p*' add surface 1
+export dagmc 'geom_100keV.h5m' faceting_tolerance 1e-3 make_watertight
+exit
