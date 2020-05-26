@@ -2,7 +2,7 @@
 import sys, os
 from optparse import *
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from sphere_simulation import sphereSimulation
+from SNM_simulation import snmSimulation
 import PyFrensie.Utility as Utility
 
 
@@ -20,7 +20,7 @@ if __name__ == "__main__":
                       help="the file that will be used for logging")
     parser.add_option("--num_particles", type="float", dest="num_particles", default=1e3,
                       help="the number of particles to run")
-    parser.add_option("--source_energy", type="float", dest="source_energy",default=1.0,
+    parser.add_option("--source_energy", type="float", dest="source_energy",default=14.1,
                       help="the source energy in MeV")
     options,args = parser.parse_args()
 
@@ -33,6 +33,5 @@ if __name__ == "__main__":
                       options.db_path,
                       options.num_particles,
                       options.source_energy,
-                      Utility.doubleArrayFromString("{1e-9,1e-4,100l,1.0}"),
                       options.threads,
                       options.log_file )

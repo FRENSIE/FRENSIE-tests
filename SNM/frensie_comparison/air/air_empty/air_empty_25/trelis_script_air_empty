@@ -18,7 +18,6 @@ create brick x 100 y 100 z 100
 imprint body all
 merge tol 5e-7
 merge all
-
 group "termination.cell" add volume 11
 group "mat_1_rho_-0.001205" add volume 4
 group "mat_1_rho_-0.001205" add volume 5
@@ -31,4 +30,4 @@ group "estimator_1.cell.tl.flux.n" add volume 4
 group "estimator_2.cell.tl.flux.n" add volume 5
 group "estimator_3.cell.tl.flux.n" add volume 6
 group "estimator_4.cell.tl.flux.n" add volume 7
-group "estimator_5,cell.tl.flux.n" add volume 8
+group "estimator_5.cell.tl.flux.n" add volume 8

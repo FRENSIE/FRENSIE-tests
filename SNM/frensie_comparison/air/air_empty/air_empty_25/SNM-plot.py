@@ -2,7 +2,7 @@
 import sys, os
 from optparse import *
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from sphere_simulation_plot import plotSphereSimulationSpectrum
+from SNM_plot_simulation import plotSNMimulationSpectrum
 
 if __name__ == "__main__":
 

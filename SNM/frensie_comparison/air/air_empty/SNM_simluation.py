@@ -22,7 +22,7 @@ import PyFrensie.Data.Native as Native
 def snmSimulation( sim_name,
                       db_path,
                       num_particles,
-                      temp,
+                      source_energy,
                       threads,
                       log_file = None ):
     
@@ -48,8 +48,8 @@ def snmSimulation( sim_name,
     # Simulate neutrons only
     simulation_properties.setParticleMode( MonteCarlo.NEUTRON_MODE )
     simulation_properties.setUnresolvedResonanceProbabilityTableModeOff()
-    simulation_properties.setNumberOfNeutronHashGridBins( 100 )
-    simulation_properties.setSurfaceFluxEstimatorAngleCosineCutoff( 0.1 )
+    simulation_properties.setNumberOfNeutronHashGridBins( 100 ) # TODO, is this necessary for TL flux wihtout energy bins?
+    simulation_properties.setSurfaceFluxEstimatorAngleCosineCutoff( 0.1 ) # TODO, can I remove this if no surface flux estimators are involved?
     
     # Set the number of histories to run and the number of rendezvous
     simulation_properties.setNumberOfHistories( num_particles )
@@ -130,15 +130,13 @@ def snmSimulation( sim_name,
 ##---------------------------------------------------------------------------##
 ## Set up the geometry
 ##---------------------------------------------------------------------------##
-    # TODO FIX .h5m, change name and things in here to match the SNM simuilaiton
 
     # Set the model properties before loading the model
-    model_properties = DagMC.DagMCModelProperties( "sphere.h5m" )
+    model_properties = DagMC.DagMCModelProperties( "SNM.h5m" )
     model_properties.setMaterialPropertyName( "mat" )
     model_properties.setDensityPropertyName( "rho" )
     model_properties.setTerminationCellPropertyName( "termination.cell" )
-    model_properties.setSurfaceFluxName( "surface.flux" )
-    model_properties.setSurfaceCurrentName( "surface.current" )
+    model_properties.setCellTrackLengthFluxName( "cell.tl.flux" )
     model_properties.useFastIdLookup()
     
     # Load the model
@@ -150,19 +148,40 @@ def snmSimulation( sim_name,
 ##---------------------------------------------------------------------------##
 ## Set up the source
 ##---------------------------------------------------------------------------##
-    #TODO LINE SOURCE, SEE MANUAL
-    # Define the generic particle distribution
-    particle_distribution = ActiveRegion.StandardParticleDistribution( "source distribution" )
+    # TODO confirm below, fix needed likely
+    # Define the generic particle distribution 1
+    particle_distribution_1 = ActiveRegion.StandardParticleDistribution( "source distribution 1" ) # purpose of this line, other strings?
     
-    particle_distribution.setEnergy( 1.0 );
-    particle_distribution.setPosition( 0.0, 0.0, 0.0 )
-    particle_distribution.constructDimensionDistributionDependencyTree()
-    
+    # source that varies in y direction
+    particle_distribution_1.setEnergy( source_energy )
+    particle_distribution_1.setPosition( -55, -27, -40 )
+    raw_spatial_component_distribution = Distribution.UniformDistribution( -27, 40 , 1.0 )
+    spatial_component_distribution = ActiveRegion.IndependentSecondarySpatialDimensionDistribution( raw_spatial_component_distribution )
+
+    # create dependency tree
+    particle_distribution_1.constructDimensionDistributionDependencyTree()
+
+    # Define the generic particle distribution 2
+    particle_distribution_2 = ActiveRegion.StandardParticleDistribution( "source distribution 2"  ) # purpose of this line, other strings?
+
+    # source that varies in z direction
+    particle_distribution_2.setEnergy( source_energy)
+    particle_distribution_2.setPosition( -55, -40, -27 )
+    raw_spatial_component_distribution = Distribution.UniformDistribution( -27, 40 , 1.0 )
+    spatial_component_distribution = ActiveRegion.IndependentTertiarySpatialDimensionDistribution( raw_spatial_component_distribution )
+
+    # create dependency tree
+    particle_distribution_2.constructDimensionDistributionDependencyTree()
+
+    # Set Time Bins for Source, TODO figure out if this is correct
+    # setSourceTimeDiscretization( Sequence ), need source to be on from 0 to 100 ms and off in 20 ms intervals after
+
     # The generic distribution will be used to generate neutrons
-    neutron_distribution = ActiveRegion.StandardNeutronSourceComponent( 0, 1.0, model, particle_distribution )
-    
-    # Assign the neutron source component to the source
-    source = ActiveRegion.StandardParticleSource( [neutron_distribution] )
+    neutron_distribution_1 = ActiveRegion.StandardNeutronSourceComponent( 0, 1.0, model, particle_distribution_1 )
+    neutron_distribution_2 = ActiveRegion.StandardNeutronSourceComponent( 0, 1.0, model, particle_distribution_2 )
+
+     # Assign the neutron source component to the source
+    source = ActiveRegion.StandardParticleSource( [neutron_distribution_1,neutron_distribution_2] )
     
 ##---------------------------------------------------------------------------##
 ## Set up the event handler
@@ -172,14 +191,12 @@ def snmSimulation( sim_name,
     # defined in the model can be constructed
     event_handler = Event.EventHandler( model, simulation_properties )
     
-    # Set the energy and collision number bins in estimator 1
-    event_handler.getEstimator( 1 ).setEnergyDiscretization( Utility.doubleArrayFromString( "{1e-9, 100l, 1.0}" ) )
-    
-    # Set the energy and collision number bins in estimator 2
-    event_handler.getEstimator( 2 ).setEnergyDiscretization( Utility.doubleArrayFromString( "{1e-9, 100l, 1.0}" ) )
-    
-    # TODO ask alex about if this is necessary if we only need a TL flux with no energy bins, also need time bins 
-
+    # Set Time Bins for Estimators
+    event_handler.getEstimator( 1 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
+    event_handler.getEstimator( 2 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
+    event_handler.getEstimator( 3 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
+    event_handler.getEstimator( 4 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
+    event_handler.getEstimator( 5 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
     
 ##---------------------------------------------------------------------------##
 ## Set up the simulation manager

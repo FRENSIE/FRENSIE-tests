@@ -116,15 +116,15 @@ c
 c //--- Tallies ---//
 c
 c
- T0  1e7 1.2e7 1.4e7 1.6e7 1.8e7 2.0e7                   $ Time bins for all tal
+ T0  1e7 1.2e7 1.4e7 1.6e7 1.8e7 2.0e7                   $ Time bins for all tallies
 c
 c Track-Length Flux Tallies
 c
- F4:N  10                                      $ Track-Length tally for NW detec
- F14:N 11                                      $ Track-Length tally for NE detec
- F24:N 12                                      $ Track-Length tally for central
- F34:N 13                                      $ Track-Length tally for SW detec
- F44:N 14                                      $ Track-Length tally for SE detec
+ F4:N  10                                      $ Track-Length tally for NW detector
+ F14:N 11                                      $ Track-Length tally for NE detector
+ F24:N 12                                      $ Track-Length tally for central detector
+ F34:N 13                                      $ Track-Length tally for SW detector
+ F44:N 14                                      $ Track-Length tally for SE detector
 c
 c Point Detector Tallies
 c
