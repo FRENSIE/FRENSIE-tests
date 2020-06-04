@@ -48,8 +48,7 @@ def snmSimulation( sim_name,
     # Simulate neutrons only
     simulation_properties.setParticleMode( MonteCarlo.NEUTRON_MODE )
     simulation_properties.setUnresolvedResonanceProbabilityTableModeOff()
-    simulation_properties.setNumberOfNeutronHashGridBins( 100 ) # TODO, is this necessary for TL flux wihtout energy bins?
-    simulation_properties.setSurfaceFluxEstimatorAngleCosineCutoff( 0.1 ) # TODO, can I remove this if no surface flux estimators are involved?
+    simulation_properties.setNumberOfNeutronHashGridBins( 100 ) 
     
     # Set the number of histories to run and the number of rendezvous
     simulation_properties.setNumberOfHistories( num_particles )
@@ -76,48 +75,45 @@ def snmSimulation( sim_name,
     nuclide_definition = scattering_center_definitions.createDefinition( "O16", Data.ZAID(8016) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
-    nuclide_properties = database.getNuclideProperties( Data.ZAID(18000) )
-    nuclide_definition = scattering_center_definitions.createDefinition( "Ar", Data.ZAID(18000) )
+    nuclide_properties = database.getNuclideProperties( Data.ZAID(18040) )
+    nuclide_definition = scattering_center_definitions.createDefinition( "Ar", Data.ZAID(18040) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
     material_definitions = Collision.MaterialDefinitionDatabase()
     material_definitions.addDefinition( "Air", 1 , ["C","N14","O16","Ar"], [0.000150,0.784431,0.210748,0.004671] )
 
-    # Material 2 - Stainless Steel 304 (SS304) done with atom fractions
-    nuclide_properties = database.getNuclideProperties( Data.ZAID(6000) )
-    nuclide_definition = scattering_center_definitions.createDefinition( "C", Data.ZAID(6000) )
-    nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
+    # Material 2 - Stainless Steel 304 (SS304) done with atom fractions, reuse carbon definition from above
 
-    nuclide_properties = database.getNuclideProperties( Data.ZAID(14000) )
-    nuclide_definition = scattering_center_definitions.createDefinition( "Si", Data.ZAID(14000) )
+    nuclide_properties = database.getNuclideProperties( Data.ZAID(14028) )
+    nuclide_definition = scattering_center_definitions.createDefinition( "Si", Data.ZAID(14028) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
     nuclide_properties = database.getNuclideProperties( Data.ZAID(15031) )
     nuclide_definition = scattering_center_definitions.createDefinition( "P", Data.ZAID(15031) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
-    nuclide_properties = database.getNuclideProperties( Data.ZAID(16000) )
-    nuclide_definition = scattering_center_definitions.createDefinition( "S", Data.ZAID(16000) )
+    nuclide_properties = database.getNuclideProperties( Data.ZAID(16032) )
+    nuclide_definition = scattering_center_definitions.createDefinition( "S", Data.ZAID(16032) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
-    nuclide_properties = database.getNuclideProperties( Data.ZAID(24000) )
-    nuclide_definition = scattering_center_definitions.createDefinition( "Cr", Data.ZAID(24000) )
+    nuclide_properties = database.getNuclideProperties( Data.ZAID(24052) )
+    nuclide_definition = scattering_center_definitions.createDefinition( "Cr", Data.ZAID(24052) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
     nuclide_properties = database.getNuclideProperties( Data.ZAID(25055) )
     nuclide_definition = scattering_center_definitions.createDefinition( "Mn", Data.ZAID(25055) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
-    nuclide_properties = database.getNuclideProperties( Data.ZAID(26000) )
-    nuclide_definition = scattering_center_definitions.createDefinition( "Fe", Data.ZAID(26000) )
+    nuclide_properties = database.getNuclideProperties( Data.ZAID(26056) )
+    nuclide_definition = scattering_center_definitions.createDefinition( "Fe", Data.ZAID(26056) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
-    nuclide_properties = database.getNuclideProperties( Data.ZAID(28000) )
-    nuclide_definition = scattering_center_definitions.createDefinition( "Ni", Data.ZAID(28000) )
+    nuclide_properties = database.getNuclideProperties( Data.ZAID(28058) )
+    nuclide_definition = scattering_center_definitions.createDefinition( "Ni", Data.ZAID(28058) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
     material_definitions = Collision.MaterialDefinitionDatabase()
-    material_definitions.addDefinition( "SS304", 2 , ["C","Si","P","S","Cr","Mn","Fe","Ni"] [0.001830,0.009781,0.000408,0.000257,0.200762,0.010001,0.690375,0.086587] )
+    material_definitions.addDefinition( "SS304", 2 , ["C","Si","P","S","Cr","Mn","Fe","Ni"], [0.001830,0.009781,0.000408,0.000257,0.200762,0.010001,0.690375,0.086587] )
 
     # Material 3 - HEU 
     nuclide_properties = database.getNuclideProperties( Data.ZAID(92235) )
@@ -132,7 +128,7 @@ def snmSimulation( sim_name,
 ##---------------------------------------------------------------------------##
 
     # Set the model properties before loading the model
-    model_properties = DagMC.DagMCModelProperties( "SNM.h5m" )
+    model_properties = DagMC.DagMCModelProperties( "snm.h5m" )
     model_properties.setMaterialPropertyName( "mat" )
     model_properties.setDensityPropertyName( "rho" )
     model_properties.setTerminationCellPropertyName( "termination.cell" )
@@ -148,7 +144,6 @@ def snmSimulation( sim_name,
 ##---------------------------------------------------------------------------##
 ## Set up the source
 ##---------------------------------------------------------------------------##
-    # TODO confirm below, fix needed likely
     # Define the generic particle distribution 1
     particle_distribution_1 = ActiveRegion.StandardParticleDistribution( "source distribution 1" ) # purpose of this line, other strings?
     
@@ -158,6 +153,14 @@ def snmSimulation( sim_name,
     raw_spatial_component_distribution = Distribution.UniformDistribution( -27, 40 , 1.0 )
     spatial_component_distribution = ActiveRegion.IndependentSecondarySpatialDimensionDistribution( raw_spatial_component_distribution )
 
+    # create time distribution
+    raw_time_component_distribution = Distribution.UniformDistribution( 0, 0.1, 1.0 )
+    time_component_distribution = ActiveRegion.IndependentTimeDimensionDistribution( raw_time_component_distribution )
+
+    # apply space and time distributions to distribution 1
+    particle_distribution_1.setDimensionDistribution( spatial_component_distribution )
+    particle_distribution_1.setDimensionDistribution( time_component_distribution )
+
     # create dependency tree
     particle_distribution_1.constructDimensionDistributionDependencyTree()
 
@@ -165,20 +168,29 @@ def snmSimulation( sim_name,
     particle_distribution_2 = ActiveRegion.StandardParticleDistribution( "source distribution 2"  ) # purpose of this line, other strings?
 
     # source that varies in z direction
-    particle_distribution_2.setEnergy( source_energy)
+    particle_distribution_2.setEnergy( source_energy )
     particle_distribution_2.setPosition( -55, -40, -27 )
     raw_spatial_component_distribution = Distribution.UniformDistribution( -27, 40 , 1.0 )
     spatial_component_distribution = ActiveRegion.IndependentTertiarySpatialDimensionDistribution( raw_spatial_component_distribution )
 
+    # apply space and time distributions to distribution 2
+    particle_distribution_2.setDimensionDistribution( spatial_component_distribution )
+    particle_distribution_2.setDimensionDistribution( time_component_distribution ) # Note that the time distribution is reused
+
     # create dependency tree
     particle_distribution_2.constructDimensionDistributionDependencyTree()
 
-    # Set Time Bins for Source, TODO figure out if this is correct
-    # setSourceTimeDiscretization( Sequence ), need source to be on from 0 to 100 ms and off in 20 ms intervals after
-
     # The generic distribution will be used to generate neutrons
+    #            The first argument is the source id - this needs to be unique 
+    #            The second argument is the selection weight. For a volume
+    #            source this is usually the volume of the source region. For
+    #            a surface source this is usually the surface areaa and for
+    #            a line source this is the length of the line. In your case
+    #            the lines have equal length so using a value of 1.0 is
+    #            equivalent (the weights are converted to a discrete CDF for
+    #            sampling the source that will be used to generate a particle.)
     neutron_distribution_1 = ActiveRegion.StandardNeutronSourceComponent( 0, 1.0, model, particle_distribution_1 )
-    neutron_distribution_2 = ActiveRegion.StandardNeutronSourceComponent( 0, 1.0, model, particle_distribution_2 )
+    neutron_distribution_2 = ActiveRegion.StandardNeutronSourceComponent( 1, 1.0, model, particle_distribution_2 )
 
      # Assign the neutron source component to the source
     source = ActiveRegion.StandardParticleSource( [neutron_distribution_1,neutron_distribution_2] )
@@ -192,11 +204,11 @@ def snmSimulation( sim_name,
     event_handler = Event.EventHandler( model, simulation_properties )
     
     # Set Time Bins for Estimators
-    event_handler.getEstimator( 1 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
-    event_handler.getEstimator( 2 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
-    event_handler.getEstimator( 3 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
-    event_handler.getEstimator( 4 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
-    event_handler.getEstimator( 5 ).setTimeDiscretization( Utility.doubleArrayFromString( "{0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2}" ) )
+    event_handler.getEstimator( 1 ).setTimeDiscretization( [0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2] )
+    event_handler.getEstimator( 2 ).setTimeDiscretization( [0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2] )
+    event_handler.getEstimator( 3 ).setTimeDiscretization( [0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2] )
+    event_handler.getEstimator( 4 ).setTimeDiscretization( [0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2] )
+    event_handler.getEstimator( 5 ).setTimeDiscretization( [0 , 0.1 , 0.12 , 0.14 , 0.16 , 0.18 , 0.2] )
     
 ##---------------------------------------------------------------------------##
 ## Set up the simulation manager

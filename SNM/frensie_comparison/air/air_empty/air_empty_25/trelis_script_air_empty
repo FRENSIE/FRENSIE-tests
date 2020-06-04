@@ -32,4 +32,4 @@ group "estimator_2.cell.tl.flux.n" add volume 5
 group "estimator_3.cell.tl.flux.n" add volume 6
 group "estimator_4.cell.tl.flux.n" add volume 7
 group "estimator_5.cell.tl.flux.n" add volume 8
-export dagmc SNM.h5m faceting_tolerance 1e-4
+export dagmc snm.h5m faceting_tolerance 1e-4

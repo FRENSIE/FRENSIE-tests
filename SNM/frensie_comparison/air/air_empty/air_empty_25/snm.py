@@ -2,7 +2,7 @@
 import sys, os
 from optparse import *
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from SNM_simulation import snmSimulation
+from snm_simulation import snmSimulation
 import PyFrensie.Utility as Utility
 
 
@@ -14,7 +14,7 @@ if __name__ == "__main__":
                       help="the number of threads to use")
     parser.add_option("--db_path", type="string", dest="db_path",
                       help="the database name (with extension)")
-    parser.add_option("--sim_name", type="string", dest="sim_name", default="sphere",
+    parser.add_option("--sim_name", type="string", dest="sim_name", default="snm",
                       help="the simulation name")
     parser.add_option("--log_file", type="string", dest="log_file",
                       help="the file that will be used for logging")
