@@ -61,6 +61,7 @@ def snmSimulation( sim_name,
     # Load the database
     database = Data.ScatteringCenterPropertiesDatabase( db_path )
     scattering_center_definitions = Collision.ScatteringCenterDefinitionDatabase()
+    material_definitions = Collision.MaterialDefinitionDatabase()
 
     # Material 1 - Air, done with atom fractions
     nuclide_properties = database.getNuclideProperties( Data.ZAID(6000) )
@@ -79,11 +80,9 @@ def snmSimulation( sim_name,
     nuclide_definition = scattering_center_definitions.createDefinition( "Ar", Data.ZAID(18040) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
-    material_definitions = Collision.MaterialDefinitionDatabase()
     material_definitions.addDefinition( "Air", 1 , ["C","N14","O16","Ar"], [0.000150,0.784431,0.210748,0.004671] )
 
     # Material 2 - Stainless Steel 304 (SS304) done with atom fractions, reuse carbon definition from above
-
     nuclide_properties = database.getNuclideProperties( Data.ZAID(14028) )
     nuclide_definition = scattering_center_definitions.createDefinition( "Si", Data.ZAID(14028) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
@@ -112,7 +111,6 @@ def snmSimulation( sim_name,
     nuclide_definition = scattering_center_definitions.createDefinition( "Ni", Data.ZAID(28058) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
-    material_definitions = Collision.MaterialDefinitionDatabase()
     material_definitions.addDefinition( "SS304", 2 , ["C","Si","P","S","Cr","Mn","Fe","Ni"], [0.001830,0.009781,0.000408,0.000257,0.200762,0.010001,0.690375,0.086587] )
 
     # Material 3 - HEU 
@@ -120,8 +118,8 @@ def snmSimulation( sim_name,
     nuclide_definition = scattering_center_definitions.createDefinition( "U235", Data.ZAID(92235) )
     nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
 
-    material_definitions = Collision.MaterialDefinitionDatabase()
     material_definitions.addDefinition( "U235", 3 , ["U235"], [1.0] )
+    
     
 ##---------------------------------------------------------------------------##
 ## Set up the geometry
