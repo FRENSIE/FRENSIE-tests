@@ -18,8 +18,6 @@ if __name__ == "__main__":
                       help="the mcnp output file to load")
     parser.add_option("--mcnp_file_start", type="int", dest="mcnp_file_start",
                       help="the mcnp output file start line")
-    parser.add_option("--mcnp_file_end", type="int", dest="mcnp_file_end",
-                      help="the mcnp output file end line")
     options,args = parser.parse_args()
 
     # adjust input for axes on each image
@@ -35,7 +33,6 @@ if __name__ == "__main__":
                                   options.entity_id,
                                   options.mcnp_file,
                                   options.mcnp_file_start,
-                                  options.mcnp_file_end,
                                   top_ylims = top_ylims,
                                   bottom_ylims = bottom_ylims,
                                   xlims = [0.0001,1],
