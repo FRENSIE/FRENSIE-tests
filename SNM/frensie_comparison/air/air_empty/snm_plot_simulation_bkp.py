@@ -9,13 +9,14 @@ import PyFrensie.MonteCarlo as MonteCarlo
 import PyFrensie.MonteCarlo.Event as Event
 import PyFrensie.MonteCarlo.Manager as Manager
 from spectrum_plot_tools import plotSpectralDataWithErrors
-from MCNP_data_extractor import extractData
 
 def plotSNMSimulationSpectrum( rendezvous_file,
                                   estimator_id,
                                   entity_id,
                                   mcnp_file,
                                   mcnp_file_start,
+                                  mcnp_file_end,
+                                  is_a_current,
                                   top_ylims = None,
                                   bottom_ylims = None,
                                   xlims = None,
@@ -23,42 +24,50 @@ def plotSNMSimulationSpectrum( rendezvous_file,
     # Reload the simulation
     manager = Manager.ParticleSimulationManagerFactory( rendezvous_file ).getManager()
     
-    # Extract the estimator of interest from FRENSIE
+    # Extract the estimator of interest
     estimator = manager.getEventHandler().getEstimator( estimator_id )
 
     entity_bin_data = estimator.getEntityBinProcessedData( entity_id )
-    entity_bin_data["t_bins"] = estimator.getTimeDiscretization()
-    #TODO ASK IF THIS IS CORRECT, "e_bins" meaning?
+    entity_bin_data["e_bins"] = estimator.getEnergyDiscretization()
 
-    # print FRENSIE results
     for i in range(0,len(entity_bin_data["mean"])):
-        print entity_bin_data["t_bins"][i+1], entity_bin_data["mean"][i], entity_bin_data["re"][i]
-    
-    # create a dictionary for the mcnp data
-    # TODO ASK ABOUT TIME VS ENERGY
-    mcnp_bin_data = {"e_up": [], "mean": [], "re": []}
+        print entity_bin_data["e_bins"][i+1], entity_bin_data["mean"][i], entity_bin_data["re"][i]
     
     # Extract the mcnp data from the output file
-    time , mean , re = extractData( mcnp_file_start, mcnp_file)
+    mcnp_file = open( mcnp_file, "r" )
+    mcnp_file_lines = mcnp_file.readlines()
+    
+    mcnp_bin_data = {"e_up": [], "mean": [], "re": []}
+    
+    for i in range(mcnp_file_start,mcnp_file_end+1):
+        split_line = mcnp_file_lines[i-1].split()
+        
+        mcnp_bin_data["e_up"].append( float(split_line[0]) )
+        mcnp_bin_data["mean"].append( float(split_line[1]) )
+        mcnp_bin_data["re"].append( float(split_line[2]) )
+        
+    output_file_name = "h2o_sphere_"
+    output_file_names = []
 
-    for i in range(0,length(time)):
-        mcnp_bin_data["e_up"].append( float(time[i]) )
-        mcnp_bin_data["mean"].append( float(mean[i]]) )
-        mcnp_bin_data["re"].append( float( re[i] )
-
-    # TODO update for name from current directory
-    output_file_name = "air_empty_25.eps"
+    if is_a_current:
+        output_file_names.append( output_file_name + "current.eps" )
+        output_file_names.append( output_file_name + "current.png" )
+        data_type = "Current"
+    else:
+        output_file_names.append( output_file_name + "flux.eps" )
+        output_file_names.append( output_file_name + "flux.png" )
+        data_type = "Flux"
         
     # Plot the data
     plotSpectralDataWithErrors( "FRENSIE",
                                 entity_bin_data,
                                 "MCNP6",
                                 mcnp_bin_data,
-                                "Flux",
+                                data_type,
                                 True,
-                                False,
+                                per_lethargy = is_a_current,
                                 top_ylims = top_ylims,
                                 bottom_ylims = bottom_ylims,
                                 xlims = xlims,
                                 legend_pos = legend_pos,
-                                output_plot_names = output_file_name )
+                                output_plot_names = output_file_names )
