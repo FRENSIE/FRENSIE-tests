@@ -27,12 +27,12 @@ def plotSNMSimulationSpectrum( rendezvous_file,
     estimator = manager.getEventHandler().getEstimator( estimator_id )
 
     entity_bin_data = estimator.getEntityBinProcessedData( entity_id )
-    entity_bin_data["t_bins"] = estimator.getTimeDiscretization()
+    entity_bin_data["e_bins"] = estimator.getTimeDiscretization()
     #TODO ASK IF THIS IS CORRECT, "e_bins" meaning?
 
     # print FRENSIE results
     for i in range(0,len(entity_bin_data["mean"])):
-        print entity_bin_data["t_bins"][i+1], entity_bin_data["mean"][i], entity_bin_data["re"][i]
+        print entity_bin_data["e_bins"][i+1], entity_bin_data["mean"][i], entity_bin_data["re"][i]
     
     # create a dictionary for the mcnp data
     # TODO ASK ABOUT TIME VS ENERGY
@@ -43,22 +43,19 @@ def plotSNMSimulationSpectrum( rendezvous_file,
 
     for i in range(0,length(time)):
         mcnp_bin_data["e_up"].append( float(time[i]) )
-        mcnp_bin_data["mean"].append( float(mean[i]]) )
+        mcnp_bin_data["mean"].append( float(mean[i]) )
         mcnp_bin_data["re"].append( float( re[i] )
 
-    # TODO update for name from current directory
-    output_file_name = "air_empty_25.eps"
-        
     # Plot the data
     plotSpectralDataWithErrors( "FRENSIE",
                                 entity_bin_data,
                                 "MCNP6",
                                 mcnp_bin_data,
                                 "Flux",
-                                True,
+                                False,
                                 False,
                                 top_ylims = top_ylims,
                                 bottom_ylims = bottom_ylims,
                                 xlims = xlims,
                                 legend_pos = legend_pos,
-                                output_plot_names = output_file_name )
+                                output_plot_names = 'air_empty_25.eps' )
