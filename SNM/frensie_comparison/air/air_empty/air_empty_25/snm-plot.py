@@ -14,7 +14,7 @@ if __name__ == "__main__":
                       help="the estimator id to use")
     parser.add_option("--entity_id", type="int", dest="entity_id",
                       help="the entity id to use")
-    parser.add_option("--mcnp_file", type="string", dest="mcnp_file",g
+    parser.add_option("--mcnp_file", type="string", dest="mcnp_file",
                       help="the mcnp output file to load")
     parser.add_option("--mcnp_file_start", type="int", dest="mcnp_file_start",
                       help="the mcnp output file start line")
