@@ -2,7 +2,7 @@
 import sys, os
 from optparse import *
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from snm_plot_simulation import plotSNMimulationSpectrum
+from snm_plot_simulation import plotSNMSimulationSpectrum
 
 if __name__ == "__main__":
 
@@ -21,19 +21,18 @@ if __name__ == "__main__":
     options,args = parser.parse_args()
 
     # adjust input for axes on each image
-    top_ylims = [0.0, 100]
+    top_ylims = [0.0, 1e-4]
     bottom_ylims = [0.95, 1.05]
     # legend position
     legend_pos = (0.95,0.95)
-
         
     # Plot the spectrum
-    plotSNMimulationSpectrum( options.rendezvous_file,
+    plotSNMSimulationSpectrum( options.rendezvous_file,
                                   options.estimator_id,
                                   options.entity_id,
                                   options.mcnp_file,
                                   options.mcnp_file_start,
                                   top_ylims = top_ylims,
                                   bottom_ylims = bottom_ylims,
-                                  xlims = [0,100],
+                                  xlims = [0,0.2],
                                   legend_pos = legend_pos )

@@ -20,6 +20,11 @@ def plotSNMSimulationSpectrum( rendezvous_file,
                                   bottom_ylims = None,
                                   xlims = None,
                                   legend_pos = None ):
+
+    # Activate just-in-time initialization to prevent automatic loading of the
+    # geometry and data tables
+    Utility.activateJustInTimeInitialization()
+
     # Reload the simulation
     manager = Manager.ParticleSimulationManagerFactory( rendezvous_file ).getManager()
     
@@ -41,10 +46,13 @@ def plotSNMSimulationSpectrum( rendezvous_file,
     # Extract the mcnp data from the output file
     time , mean , re = extractData( mcnp_file_start, mcnp_file)
 
-    for i in range(0,length(time)):
+    for i in range(0,len(time)):
         mcnp_bin_data["e_up"].append( float(time[i]) )
         mcnp_bin_data["mean"].append( float(mean[i]) )
-        mcnp_bin_data["re"].append( float( re[i] )
+        mcnp_bin_data["re"].append( float( re[i] ) )
+
+    print "MCNP"
+    print mcnp_bin_data
 
     # Plot the data
     plotSpectralDataWithErrors( "FRENSIE",
@@ -58,4 +66,4 @@ def plotSNMSimulationSpectrum( rendezvous_file,
                                 bottom_ylims = bottom_ylims,
                                 xlims = xlims,
                                 legend_pos = legend_pos,
-                                output_plot_names = 'air_empty_25.eps' )
+                                output_plot_names = ['air_empty_25.eps'] )
