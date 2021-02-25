@@ -49,7 +49,7 @@ def sphereSimulation( sim_name,
     simulation_properties = MonteCarlo.SimulationProperties()
 
     # Simulate neutrons only
-    simulation_properties.setParticleMode( MonteCarlo.NEUTRON_MODE )
+    simulation_properties.setParticleMode( MonteCarlo.NEUTRON_PHOTON_MODE )
     simulation_properties.setUnresolvedResonanceProbabilityTableModeOff()
     simulation_properties.setNumberOfNeutronHashGridBins( 100 )
 
