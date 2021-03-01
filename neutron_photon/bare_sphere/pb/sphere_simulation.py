@@ -55,7 +55,7 @@ def sphereSimulation( sim_name,
 
     # Set the number of histories to run and the number of rendezvous
     simulation_properties.setNumberOfHistories( num_particles )
-    simulation_properties.setMinNumberOfRendezvous( 10 )
+    simulation_properties.setMinNumberOfRendezvous( 1 )
 
 
 
@@ -118,7 +118,7 @@ def sphereSimulation( sim_name,
     # Define the generic particle distribution
     particle_distribution = ActiveRegion.StandardParticleDistribution( "source distribution" )
 
-    particle_distribution.setEnergy(source_energy );
+    particle_distribution.setEnergy(source_energy )
     particle_distribution.setPosition( 0.0, 0.0, 0.0 )
     particle_distribution.constructDimensionDistributionDependencyTree()
 
