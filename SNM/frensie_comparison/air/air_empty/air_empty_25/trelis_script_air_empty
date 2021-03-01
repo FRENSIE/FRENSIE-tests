@@ -1,0 +1,35 @@
+cd '/Users/lewisgross/Local_Projects/Trelis'
+create brick x 100 y 100 z 100
+create brick x 105 y 105 z 105
+subtract volume 1 from volume 2
+create brick x 10 y 20 z 20
+move volume 4 x 57.5 y 35 z 35
+create brick x 10 y 20 z 20
+move volume 5 x 57.5 y -35 z 35
+create brick x 10 y 20 z 20
+move volume 6 x 57.5 y 0 z 0
+create brick x 10 y 20 z 20
+move volume 7 x 57.5 y 35 z -35
+create brick x 10 y 20 z 20
+move volume 8 x 57.5 y -35 z -35
+create brick x 150 y 150 z 150
+create brick x 152 y 152 z 152
+subtract volume 9 from volume 10
+create brick x 100 y 100 z 100
+imprint body all
+merge tol 5e-7
+merge all
+group "termination.cell" add volume 11
+group "mat_1_rho_-0.001205" add volume 4
+group "mat_1_rho_-0.001205" add volume 5
+group "mat_1_rho_-0.001205" add volume 6
+group "mat_1_rho_-0.001205" add volume 7
+group "mat_1_rho_-0.001205" add volume 8
+group "mat_1_rho_-0.001205" add volume 12
+group "mat_2_rho_-8.000000" add volume 3
+group "estimator_1.cell.tl.flux.n" add volume 4
+group "estimator_2.cell.tl.flux.n" add volume 5
+group "estimator_3.cell.tl.flux.n" add volume 6
+group "estimator_4.cell.tl.flux.n" add volume 7
+group "estimator_5.cell.tl.flux.n" add volume 8
+export dagmc snm.h5m faceting_tolerance 1e-4

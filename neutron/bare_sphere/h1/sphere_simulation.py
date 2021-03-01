@@ -73,7 +73,7 @@ def sphereSimulation( sim_name,
     
     # Set the definition for material 1
     material_definitions = Collision.MaterialDefinitionDatabase()
-    material_definitions.addDefinition( "H1", 1, ["H1"], [1.0] )
+    material_definitions.addDefinition( "H1", 1, ["H1"], [-1.0] )
     
 ##---------------------------------------------------------------------------##
 ## Set up the geometry

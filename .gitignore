@@ -15,6 +15,7 @@
 *.nav
 *.vrb
 *.h5
+*.h5m
 *.gif
 *.ico
 *.js
@@ -41,3 +42,6 @@ GTAGS
 GRTAGS
 GPATH
 .vscode/
+neutron/bare_sphere/pb/PHILIP_README
+neutron/bare_sphere/pb_input_files.zip
+electron/lockwood/C/C_1/*

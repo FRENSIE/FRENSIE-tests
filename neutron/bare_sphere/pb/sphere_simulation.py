@@ -89,7 +89,7 @@ def sphereSimulation( sim_name,
 
 
     material_definitions = Collision.MaterialDefinitionDatabase()
-    material_definitions.addDefinition( "Pb_nat", 1 , ["Pb204","Pb206","Pb207","Pb208"], [0.014,0.241,0.221,0.524] )
+    material_definitions.addDefinition( "Pb_nat", 1 , ["Pb204","Pb206","Pb207","Pb208"], [-0.014,-0.241,-0.221,-0.524] )
 
 
 ##---------------------------------------------------------------------------##

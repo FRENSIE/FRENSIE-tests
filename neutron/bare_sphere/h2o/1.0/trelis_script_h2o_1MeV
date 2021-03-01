@@ -1,0 +1,12 @@
+create sphere radius 10
+create brick x 22 y 22 z 22
+create brick x 24 y 24 z 24
+subtract volume 2 from volume 3
+imprint body all
+merge tol 5e-7
+merge all
+group "termination.cell" add volume 4
+group "mat_1_rho_-0.998207" add volume 1
+group "estimator_1.surface.current.n" add surface 1
+group "estimator_2.surface.flux.n" add surface 1
+export dagmc sphere.h5m faceting_tolerance 1.e-4
