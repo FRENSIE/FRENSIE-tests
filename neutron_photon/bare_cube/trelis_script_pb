@@ -1,0 +1,12 @@
+create brick x 56 y 56 z 56
+create brick x 60 y 60 z 60
+create brick x 64 y 64 z 64
+subtract volume 2 from volume 3
+imprint body all
+merge tol 5e-7
+merge all
+group "termination.cell" add volume 4
+group "mat_1_rho_-11.34" add volume 1
+group "estimator_1.cell.tl.flux.n" add volume 1
+group "estimator_2.cell.tl.flux.p" add volume 1
+export dagmc "/home/mouginot/work/FRENSIE-tests/neutron_photon/bare_sphere/cube.h5m" faceting_tolerance 1.e-4
