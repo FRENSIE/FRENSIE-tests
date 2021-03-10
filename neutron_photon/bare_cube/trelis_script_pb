@@ -9,4 +9,4 @@ group "termination.cell" add volume 4
 group "mat_1_rho_-11.34" add volume 1
 group "estimator_1.cell.tl.flux.n" add volume 1
 group "estimator_2.cell.tl.flux.p" add volume 1
-export dagmc "/home/mouginot/work/FRENSIE-tests/neutron_photon/bare_sphere/cube.h5m" faceting_tolerance 1.e-4
+export dagmc "/home/mouginot/work/FRENSIE-tests/neutron_photon/bare_cube/cube.h5m" faceting_tolerance 1.e-4
