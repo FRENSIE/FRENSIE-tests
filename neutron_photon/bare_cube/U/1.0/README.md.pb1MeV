@@ -1,0 +1,3 @@
+run `./runner.py --db_path=/home/software/mcnpdata/database.xml --sim_name="U_cube" --num_particles=1e8 --threads=8`
+run `./simulation-plot.py --rendezvous_file="U_cube_rendezvous_10.xml" --estimator_id=1 --entity_id=1`
+run `./simulation-plot.py --rendezvous_file="U_cube_rendezvous_10.xml" --estimator_id=2 --entity_id=1`
