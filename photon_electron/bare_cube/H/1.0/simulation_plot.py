@@ -12,15 +12,7 @@ import PyFrensie.MonteCarlo.Manager as Manager
 
 def plotSimulationSpectrum( rendezvous_file,
                                   estimator_id,
-                                  entity_id,
-                                  mcnp_file,
-                                  mcnp_file_start,
-                                  mcnp_file_end,
-                                  is_a_current,
-                                  top_ylims = None,
-                                  bottom_ylims = None,
-                                  xlims = None,
-                                  legend_pos = None ):
+                                  entity_id):
     # Reload the simulation
     manager = Manager.ParticleSimulationManagerFactory( rendezvous_file ).getManager()
     
