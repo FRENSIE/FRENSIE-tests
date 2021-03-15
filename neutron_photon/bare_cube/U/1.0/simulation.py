@@ -79,24 +79,6 @@ def Simulation( sim_name,
     atomic_properties = database.getAtomProperties(Data.ZAID(92238))
     u238_definition.setPhotoatomicDataProperties( atomic_properties.getSharedPhotoatomicDataProperties( Data.PhotoatomicDataProperties.Native_EPR_FILE, 0) )
 
-    # nuclide_properties = database.getNuclideProperties( Data.ZAID(82204) )
-    # nuclide_definition = scattering_center_definitions.createDefinition( "Pb204", Data.ZAID(82204) )
-    # nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
-
-    # nuclide_properties = database.getNuclideProperties( Data.ZAID(82206) )
-    # nuclide_definition = scattering_center_definitions.createDefinition( "Pb206", Data.ZAID(82206) )
-    # nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
-
-
-    # nuclide_properties = database.getNuclideProperties( Data.ZAID(82207) )
-    # nuclide_definition = scattering_center_definitions.createDefinition( "Pb207", Data.ZAID(82207) )
-    # nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
-
-    # nuclide_properties = database.getNuclideProperties( Data.ZAID(82208) )
-    # nuclide_definition = scattering_center_definitions.createDefinition( "Pb208", Data.ZAID(82208) )
-    # nuclide_definition.setNuclearDataProperties( nuclide_properties.getSharedNuclearDataProperties( Data.NuclearDataProperties.ACE_FILE, 8, 293.6 , False ) )
-
-
     material_definitions = Collision.MaterialDefinitionDatabase()
     material_definitions.addDefinition( "U_238", 1 , ["U238"], [1] )
 
